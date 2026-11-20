@@ -1,0 +1,25 @@
+name: ✨ Feature idea
+description: Something new for the Action, the data or the scene.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What would you like git-campfire to do?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What does it make better for you or for the people visiting your profile?
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: How would we know it works? A checklist is perfect.
+      placeholder: |
+        - [ ] ...

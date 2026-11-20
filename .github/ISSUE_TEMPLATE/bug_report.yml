@@ -1,0 +1,42 @@
+name: 🐛 Bug report
+description: The fire burns wrong, the SVG looks broken or the streak is off.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! Found a security problem? Please follow the [security policy](https://github.com/FelipeBeltranING/git-campfire/security/policy) instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you see, and what did you expect to see?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce it
+      description: The command or workflow step, with its inputs (theme, timezone, thresholds…).
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: visual
+    attributes:
+      label: Screenshot or SVG
+      description: Drag a screenshot here, or attach the SVG.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The release or commit you used, e.g. v0.1.0.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it look wrong?
+      multiple: true
+      options:
+        - GitHub README
+        - Browser (opening the SVG directly)
+        - Somewhere else
