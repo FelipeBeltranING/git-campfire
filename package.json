@@ -7,7 +7,8 @@
     "git-campfire": "src/cli.js"
   },
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "snapshots": "node scripts/snapshots.mjs"
   },
   "engines": {
     "node": ">=20"
