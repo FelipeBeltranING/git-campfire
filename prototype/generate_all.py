@@ -1,11 +1,11 @@
-"""Regenera todo el arte de referencia en ../art desde el prototipo (solo librería estándar de Python 3)."""
+"""Regenera todo el arte de referencia en ../assets desde el prototipo (solo librería estándar de Python 3)."""
 import os
 import render
 import options
 import options3
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ART = os.path.join(HERE, "..", "art")
+ART = os.path.join(HERE, "..", "assets")
 
 
 def save(rel, svg):
