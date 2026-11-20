@@ -1,32 +1,54 @@
 # Contributing to git-campfire 🔥
 
-Thanks for wanting to sit by the fire! git-campfire is young: today it is the approved art and the Python
-reference engine, and the JavaScript Action is being built on top of them. There is room for code,
-pixel art, docs and ideas.
+Thanks for wanting to sit by the fire! git-campfire is young: the Action works with the `ruins`
+theme, and two more scenes are on their way. There is room for code, pixel art, docs and ideas.
 
 ## Setup
 
-Right now you only need Python 3 (standard library, nothing to install):
+You only need Node 20+. There are no dependencies.
 
 ```bash
 git clone https://github.com/FelipeBeltranING/git-campfire.git
-cd git-campfire/prototype
+cd git-campfire
+npm test                                         # the node:test suite
+node src/cli.js --demo --streak 9 --out demo.svg # a campfire with made-up data
+node src/cli.js --help                           # all options
+npm run lint                                     # every file parses, LF endings
+npm run size                                     # every theme and state under 100 KB
+```
+
+Open any `.svg` in your browser to watch it burn.
+
+### The art is tested byte for byte
+
+- `test/ruins.test.js` renders `ruins` with the sketches' data and expects **exactly** the files in
+  `assets/ruins/`. If it fails, you changed the art.
+- `test/snapshots/` holds every theme in every state, with and without the HUD. After an intended
+  change to the art, regenerate them with `npm run snapshots` and commit them with a screenshot.
+
+### The Python prototype
+
+The sketches were drawn by the Python prototype (standard library only). New themes and states are
+usually sketched there first:
+
+```bash
+cd prototype
 python3 generate_all.py               # redraw every scene in ../assets
 python3 render.py 9 23 out.svg 1111111  # ruins: streak, contributions this week, output, last 7 days
 ```
 
-Open any `.svg` in your browser to watch it burn. A clean run of `generate_all.py` produces no diff: if
-you changed the prototype on purpose, commit the regenerated SVGs with it.
-
-Once the JavaScript engine lands (milestone [`v0.2.0`](https://github.com/FelipeBeltranING/git-campfire/milestone/2)),
-you will need Node 20+ and `npm test`. This guide will be updated then.
+A clean run of `generate_all.py` produces no diff.
 
 ## Where things live
 
 | Path | What |
 | --- | --- |
+| [`src/engine/`](src/engine) | The renderer: random generator, layers, sky, light, fire, font, HUD |
+| [`src/themes/`](src/themes) | One file per scene |
+| [`src/`](src) | The calendar (`github.js`), the streak (`streak.js`), the Action and the CLI |
+| [`test/`](test) | `node:test` suites and the SVG snapshots |
 | [`assets/`](assets) | The approved art, one folder per theme, plus `explorations/` |
-| [`prototype/`](prototype) | The Python engine that draws that art: the visual reference |
+| [`prototype/`](prototype) | The Python engine that drew that art: the visual reference |
 | [`docs/`](docs) | [Concept](docs/concept.md), [research](docs/research.md) and the [render spec](docs/render-spec.md) |
 
 ## Rules of the SVG
@@ -70,6 +92,8 @@ Versions follow [semantic versioning](https://semver.org), and every release is 
 ## Before you open a PR ✅
 
 - [ ] The PR closes an issue (`Closes #n`).
+- [ ] `npm test` passes.
+- [ ] If the art changed on purpose, `npm run snapshots` was run and the snapshots are committed.
 - [ ] If you touched the prototype, `generate_all.py` was run and the SVGs are committed.
 - [ ] No SVG is over 100 KB.
 - [ ] Visual changes have a screenshot or the SVG attached.
