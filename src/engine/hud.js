@@ -37,10 +37,15 @@ export function hud({ streak, week, days, status, color, colors = {}, x0 = 4, y0
       frame.put(x, y, side || cap ? pal.frame : pal.bg);
     }
   }
+  // Up to 3 digits sit where the prototype put them; longer numbers move left
+  // so they never leave the frame.
+  const numberX = (s) => (s.length <= 3 ? x0 + 31 : x0 + w - 1 - s.length * 4);
+  const s1 = compact(streak);
+  const s2 = compact(week);
   text(frame, "STREAK", x0 + 3, y0 + 3, pal.label);
-  text(frame, String(streak), x0 + 31, y0 + 3, color);
+  text(frame, s1, numberX(s1), y0 + 3, color);
   text(frame, "WEEK", x0 + 3, y0 + 10, pal.label);
-  text(frame, String(week), x0 + 31, y0 + 10, pal.week);
+  text(frame, s2, numberX(s2), y0 + 10, pal.week);
   days.forEach((on, i) => {
     for (let dx = 0; dx < 4; dx++) {
       for (let dy = 0; dy < 3; dy++) frame.put(x0 + 3 + i * 5 + dx, y0 + 17 + dy, on ? color : pal.off);
@@ -49,4 +54,10 @@ export function hud({ streak, week, days, status, color, colors = {}, x0 = 4, y0
   const statusLayer = new Layer({ truncate: true });
   text(statusLayer, status, x0 + 3, y0 + 24, color);
   return { frame, status: statusLayer };
+}
+
+/** Numbers of 6 digits or more are written in thousands ("123K") to fit the frame. */
+export function compact(n) {
+  const v = Math.max(0, Math.trunc(n));
+  return v >= 100000 ? `${Math.floor(v / 1000)}K` : String(v);
 }
