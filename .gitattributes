@@ -1,0 +1,13 @@
+# Keep every text file with LF endings on every OS, so a regenerated SVG
+# is byte-identical no matter where it was drawn.
+* text=auto eol=lf
+
+*.svg text eol=lf
+*.py  text eol=lf
+*.js  text eol=lf
+*.md  text eol=lf
+*.yml text eol=lf
+
+*.png binary
+*.gif binary
+*.mp4 binary
