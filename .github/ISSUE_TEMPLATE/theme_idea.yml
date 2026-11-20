@@ -1,0 +1,45 @@
+name: 🎨 Theme idea
+description: A new place for the traveler to rest, or a new state for an existing theme.
+labels: ["theme", "design"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Design comes before code: a theme is sketched and approved here before anyone ports it.
+        Keep it original: nothing taken from existing games (see [Intellectual property](https://github.com/FelipeBeltranING/git-campfire/blob/main/docs/concept.md#5-intellectual-property)).
+  - type: input
+    id: name
+    attributes:
+      label: Theme name
+      placeholder: e.g. lighthouse
+    validations:
+      required: true
+  - type: textarea
+    id: scene
+    attributes:
+      label: The scene
+      description: Where are we? What surrounds the fire?
+    validations:
+      required: true
+  - type: textarea
+    id: states
+    attributes:
+      label: The four fires
+      description: How does the scene change from ASHEN to KINDLED, BLAZING and ETERNAL?
+      value: |
+        - ASHEN (0 days):
+        - KINDLED (1–3 days):
+        - BLAZING (4–14 days):
+        - ETERNAL (15+ days):
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Data in the scene
+      description: Like the cathedral candles for the last 7 days. Optional, but it's what makes a theme special.
+  - type: textarea
+    id: sketch
+    attributes:
+      label: Sketch
+      description: A drawing, a screenshot or an SVG made with the prototype. Anything helps.
