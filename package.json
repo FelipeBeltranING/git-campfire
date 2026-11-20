@@ -1,0 +1,29 @@
+{
+  "name": "git-campfire",
+  "version": "0.1.0",
+  "description": "A pixel-art campfire in your README that burns as long as your contribution streak does.",
+  "type": "module",
+  "bin": {
+    "git-campfire": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeBeltranING/git-campfire.git"
+  },
+  "keywords": [
+    "github",
+    "profile-readme",
+    "contribution-streak",
+    "pixel-art",
+    "github-actions",
+    "svg"
+  ],
+  "author": "David Felipe Beltrán Tabares"
+}
