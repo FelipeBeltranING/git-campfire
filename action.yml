@@ -1,0 +1,45 @@
+name: "git-campfire"
+description: "A pixel-art campfire for your README that burns as long as your contribution streak does."
+author: "David Felipe Beltrán Tabares"
+branding:
+  icon: "moon"
+  color: "orange"
+inputs:
+  github_user_name:
+    description: "GitHub username whose contribution streak feeds the fire."
+    required: false
+    default: ${{ github.repository_owner }}
+  github_token:
+    description: "Token used to read the contribution calendar."
+    required: false
+    default: ${{ github.token }}
+  theme:
+    description: "Scene to draw: ruins."
+    required: false
+    default: "ruins"
+  output_path:
+    description: "Where to write the SVG. Several paths can be separated by commas or new lines."
+    required: false
+    default: "dist/campfire.svg"
+  timezone:
+    description: "IANA time zone that decides what 'today' is, e.g. America/Bogota."
+    required: false
+    default: "UTC"
+  show_stats:
+    description: "Draw the HUD with the streak, the week and the last 7 days (true/false)."
+    required: false
+    default: "true"
+  thresholds:
+    description: "Advanced: the streak, in days, where KINDLED, BLAZING and ETERNAL start."
+    required: false
+    default: "1,4,15"
+outputs:
+  streak:
+    description: "Current streak in days."
+  longest:
+    description: "Longest streak in the last year."
+  state:
+    description: "ASHEN, KINDLED, BLAZING or ETERNAL."
+runs:
+  using: "node24"
+  main: "src/action.js"
