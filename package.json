@@ -1,6 +1,6 @@
 {
   "name": "git-campfire",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A pixel-art campfire in your README that burns as long as your contribution streak does.",
   "type": "module",
   "bin": {
