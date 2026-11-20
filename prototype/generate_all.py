@@ -11,7 +11,8 @@ ART = os.path.join(HERE, "..", "assets")
 def save(rel, svg):
     path = os.path.join(ART, rel)
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as fh:
+    # LF y UTF-8 explícitos: el mismo SVG byte a byte en Windows, macOS y Linux
+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(svg)
     print(f"{rel:38s} {len(svg) // 1024:4d} KB")
 
