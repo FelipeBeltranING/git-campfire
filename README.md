@@ -79,23 +79,75 @@ The numbers don't sit on a card next to the art: they are part of it.
 - **The candles** in the cathedral and **the rune** in the ruins light up with your work.
 - **The fire, the light, the embers and even the stars** grow with the streak.
 
-## 🧭 What it will look like
+## 🧭 Light your own campfire (2 minutes)
 
-When the Action ships (`v0.2.0`), lighting your campfire will be one step in a daily workflow:
+**1.** In your profile repo (`your-username/your-username`), create `.github/workflows/campfire.yml`:
 
 ```yaml
-- uses: FelipeBeltranING/git-campfire@v0   # not published yet
-  with:
-    theme: ruins              # ruins, void or cathedral
-    timezone: America/Bogota  # decides what "today" is
-    output_path: dist/campfire.svg
+name: Light my campfire
+
+on:
+  schedule:
+    - cron: "17 4 * * *" # once a day, near the end of your day (this is 23:17 in Bogotá)
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  campfire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: FelipeBeltranING/git-campfire@v0
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          output_path: dist/campfire.svg
+          timezone: America/Bogota # your IANA time zone: what "today" means
+
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+**2.** Run it once from the **Actions** tab (or wait for the daily run).
+
+**3.** Add this line to your `README.md`:
 
 ```md
 ![My campfire](https://raw.githubusercontent.com/your-username/your-username/output/campfire.svg)
 ```
 
-The planned inputs are in the [concept](docs/concept.md#4-planned-inputs-actionyml).
+That's it. The SVG lives on an `output` branch, so the bot never commits to your `main`. The full
+workflow is in [`examples/campfire.yml`](examples/campfire.yml).
+
+## ⚙️ Inputs
+
+| Input | Default | Description |
+| --- | --- | --- |
+| `github_user_name` | repo owner | Whose contribution streak feeds the fire |
+| `github_token` | `github.token` | Reads the contribution calendar |
+| `theme` | `ruins` | `ruins` for now; `void` and `cathedral` are on their way |
+| `output_path` | `dist/campfire.svg` | Where the SVG is written (several paths: comma or new line) |
+| `timezone` | `UTC` | IANA time zone that decides what "today" is, e.g. `America/Bogota` |
+| `show_stats` | `true` | Draw the HUD with the streak, the week and the last 7 days |
+| `thresholds` | `1,4,15` | Advanced: the streak where KINDLED, BLAZING and ETERNAL start |
+
+The step also sets the outputs `streak`, `longest` and `state`, and writes a small summary to the run.
+
+## 💻 Run it locally
+
+No dependencies, just Node 20+:
+
+```bash
+node src/cli.js --user your-username --timezone America/Bogota --out campfire.svg  # real data (token: --token or GITHUB_TOKEN)
+node src/cli.js --demo --streak 9 --out demo.svg                                   # made-up data, no network
+node src/cli.js --help                                                             # all options
+```
 
 ## 🗺️ Roadmap
 

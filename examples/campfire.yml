@@ -1,0 +1,35 @@
+# Save as .github/workflows/campfire.yml in your profile repo (username/username)
+name: Light my campfire
+
+on:
+  schedule:
+    # Once a day, near the end of YOUR day: 04:17 UTC is 23:17 in Bogotá.
+    # Today's grace means a late contribution never breaks the streak anyway.
+    - cron: "17 4 * * *"
+  workflow_dispatch: # run it by hand from the Actions tab
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  campfire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: FelipeBeltranING/git-campfire@v0
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          output_path: dist/campfire.svg
+          timezone: America/Bogota # your IANA time zone: what "today" means
+          # theme: ruins
+          # show_stats: true
+          # thresholds: 1,4,15
+
+      # Publish the SVG on an `output` branch, so the bot never commits to main
+      - uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
