@@ -9,19 +9,19 @@ Miss a day, and it fades to ash.
 <img src="assets/ruins/eternal.svg" alt="git-campfire, ruins theme: a hooded traveler with a red scarf sits by a tall golden campfire among night ruins, embers rising toward the stars. The HUD reads STREAK 23, WEEK 41, ETERNAL." width="100%">
 
 [![Release](https://img.shields.io/github/v/release/FelipeBeltranING/git-campfire?include_prereleases&label=release&color=ffb35c)](https://github.com/FelipeBeltranING/git-campfire/releases)
-[![Status](https://img.shields.io/badge/status-under%20construction-8a5cff)](https://github.com/FelipeBeltranING/git-campfire/milestones)
+[![Tests](https://github.com/FelipeBeltranING/git-campfire/actions/workflows/test.yml/badge.svg)](https://github.com/FelipeBeltranING/git-campfire/actions/workflows/test.yml)
+[![Status](https://img.shields.io/badge/status-early%20days-8a5cff)](https://github.com/FelipeBeltranING/git-campfire/milestones)
 [![SVG](https://img.shields.io/badge/SVG-CSS%20only%2C%20no%20JS-2b2f4a)](docs/render-spec.md)
 [![License: MIT](https://img.shields.io/github/license/FelipeBeltranING/git-campfire?color=e8853a)](LICENSE)
 
-**[🔥 The four fires](#-the-four-fires)** · **[🏛️ Three places to rest](#%EF%B8%8F-three-places-to-rest)** · **[🗺️ Roadmap](#%EF%B8%8F-roadmap)**
+**[🔥 The four fires](#-the-four-fires)** · **[🧭 Light your own](#-light-your-own-campfire-2-minutes)** · **[🏛️ Three places to rest](#%EF%B8%8F-three-places-to-rest)** · **[🗺️ Roadmap](#%EF%B8%8F-roadmap)**
 
 </div>
 
-> [!WARNING]
-> 🚧 **Under construction.** The Action can't be used yet. This first release (`v0.1.0`) brings the
-> approved art and the reference engine that drew it. The JavaScript Action comes next: follow the
-> [roadmap](https://github.com/FelipeBeltranING/git-campfire/milestones) or watch the repo to know when
-> the fire is ready.
+> [!NOTE]
+> 🔥 **The fire is lit.** Since `v0.2.0` the Action works with the default `ruins` theme. `void` and
+> `cathedral` arrive in `v0.3.0`, and the Marketplace listing in `v1.0.0`: follow the
+> [roadmap](https://github.com/FelipeBeltranING/git-campfire/milestones).
 
 ## 🔥 The four fires
 
@@ -153,9 +153,9 @@ node src/cli.js --help                                                          
 
 | Milestone | What it brings | |
 | --- | --- | --- |
-| [`v0.1.0` · Prototipo](https://github.com/FelipeBeltranING/git-campfire/milestone/1) | The approved art and the Python reference engine | 🔥 now |
-| [`v0.2.0` · Motor JS](https://github.com/FelipeBeltranING/git-campfire/milestone/2) | The engine in JavaScript, real streak data, `ruins` and a working Action | next |
-| [`v0.3.0` · Temas](https://github.com/FelipeBeltranING/git-campfire/milestone/3) | `void` and `cathedral` in all four states, accessibility, a self-updating gallery | |
+| [`v0.1.0` · Prototipo](https://github.com/FelipeBeltranING/git-campfire/milestone/1?closed=1) | The approved art and the Python reference engine | ✅ |
+| [`v0.2.0` · Motor JS](https://github.com/FelipeBeltranING/git-campfire/milestone/2?closed=1) | The engine in JavaScript, real streak data, `ruins` and a working Action | 🔥 now |
+| [`v0.3.0` · Temas](https://github.com/FelipeBeltranING/git-campfire/milestone/3) | `void` and `cathedral` in all four states, accessibility, a self-updating gallery | next |
 | [`v1.0.0` · Marketplace](https://github.com/FelipeBeltranING/git-campfire/milestone/4) | The GitHub Marketplace and a live web generator | |
 
 Further down the road: a longest-streak progression that stays even when the fire goes out, a `heat`
@@ -170,18 +170,21 @@ mode where the fire cools instead of dying, and maybe a `trail` of braziers. See
   scene weighs 25–70 KB.
 - Light by depth with 4 levels and ordered dithering, procedural fire frames, and a seeded random
   generator, so the image only changes when your streak does.
+- Plain JavaScript with **zero dependencies**: one GraphQL query and about a second per run.
+- The engine is a one-to-one port of the Python sketchbook in [`prototype/`](prototype), and the tests
+  keep `ruins` **byte-identical** to the approved art in [`assets/`](assets).
 
-The details are in the [render spec](docs/render-spec.md). The Python sketchbook that drew everything is
-in [`prototype/`](prototype):
-
-```bash
-cd prototype && python3 generate_all.py   # redraws every scene in assets/
-```
+The details are in the [render spec](docs/render-spec.md).
 
 ## 🤝 Contributing
 
 Ideas, sketches and PRs are welcome. Read the [contributing guide](CONTRIBUTING.md) and pick an
 [issue](https://github.com/FelipeBeltranING/git-campfire/issues).
+
+```bash
+npm test             # node:test, no dependencies
+npm run snapshots    # after an intended change to the art
+```
 
 ## 🌗 Sister projects
 
